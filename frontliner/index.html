@@ -1,0 +1,334 @@
+<!app-type="html">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Instagram Comment Analyzer | InstaSenti</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/logo-instasenti.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/logo-instasenti.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/logo-instasenti.png" />
+    <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+</head>
+
+<body class="bg-white text-gray-900 antialiased">
+    <div id="app">
+        <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed top-0 w-full z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    
+                    <a href="index.html" class="flex items-center">
+                        <img src="./assets/images/logo/instasenti.png" alt="InstaSenti Logo" class="h-10 w-auto">
+                    </a>
+
+                    <div class="hidden md:flex space-x-8">
+                        <a v-for="item in menuItems" :key="item.id" :href="item.link"
+                        class="relative text-sm font-medium text-gray-600 hover:text-green-800 transition-colors group">
+                        {{ item.name }}
+                        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-800 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </div>
+
+                    <div class="hidden lg:flex items-center space-x-4">
+                        <a href="#model" class="px-5 py-2 font-medium rounded-lg bg-green-800 text-white hover:bg-green-900 text-sm">Try Now</a>
+                    </div>
+
+                    <button class="md:hidden p-2 text-gray-600" @click="configureWindow" aria-label="Toggle menu">
+                        <svg v-if="!isMobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg v-else="isMobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div v-show="isMobileMenuOpen" class="md:hidden bg-white border-t border-gray-100 shadow-xl">
+                <div class="px-4 py-4 space-y-3">
+                    <a v-for="item in menuItems" :key="item.id" :href="item.link" 
+                    class="relative block text-gray-700 hover:bg-green-50 p-2 rounded group">{{ item.name }}
+                    <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-800 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
+                        <a href="#model" class="px-5 py-2 font-medium rounded-lg bg-green-800 text-white hover:bg-green-900 text-center">Try Now</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="pt-20">
+            <section id="home" class="py-12 lg:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        
+                        <div class="lg:col-span-6 text-center lg:text-left">
+                            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200 mb-6">
+                                <span class="flex h-2 w-2 rounded-full bg-green-600 mr-2 animate-pulse"></span>
+                                Now Available: Instagram Sentiment Analyzer
+                            </span>
+
+                            <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6">
+                                Analyze Instagram <span class="text-green-800">Comments</span> Instantly.
+                            </h1>
+                            
+                            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                                InstaSenti helps you understand audience sentiment in seconds. 
+                                Map insights into positive, neutral, and negative responses to improve your social engagement.
+                            </p>
+                            
+                            <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10">
+                                <a href="#analyze" class="px-5 py-2 rounded-lg font-medium transition-all duration-200 bg-green-800 text-white hover:bg-green-900 text-lg shadow-lg shadow-green-900/20">Analyze Now</a>
+                                <a href="#how-it-works" class="px-5 py-2 rounded-lg font-medium transition-all duration-200 border border-green-800 text-green-800 hover:bg-green-50 text-lg">How It Works</a>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex items-center gap-3 text-sm font-medium text-gray-700">
+                                    <div class="p-2 bg-green-50 rounded-lg text-green-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    Real-time Scraping & Analysis
+                                </div>
+
+                                <div class="flex items-center gap-3 text-sm font-medium text-gray-700">
+                                    <div class="p-2 bg-green-50 rounded-lg text-green-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    Accurate AI Insights
+                                </div>
+
+                                <div class="flex items-center gap-3 text-sm font-medium text-gray-700">
+                                    <div class="p-2 bg-green-50 rounded-lg text-green-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    Stunning & Intuitive Visuals
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-6 relative">
+                            <div class="relative z-10 bg-gray-50 p-3 rounded-2xl border border-gray-200 shadow-2xl">
+                                <img src="./assets/images/land-page1.png" alt="Dashboard Preview" class="w-full rounded-xl" />
+                            </div>
+
+                            <div class="hidden lg:block absolute -top-4 -right-4 z-20 animate-bounce transition-all duration-1000">
+                                <div class="bg-green-950 text-white px-4 py-2 rounded-full shadow-xl text-xs font-bold">
+                                    High Model Accuracy
+                                </div>
+                            </div>
+                            
+                            <div class="hidden lg:block absolute bottom-12 -left-8 z-20">
+                                <div class="bg-emerald-600 text-white px-4 py-2 rounded-full shadow-xl text-xs font-bold">
+                                    Sentiment Charts
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="lg:py-24 py-12 bg-gray-100" id="technologies">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-12 mb-16">
+                        <div class="lg:col-span-8 lg:col-start-3 col-span-12 text-center">
+                            <small class="text-green-600 uppercase tracking-[0.3em] font-black text-xs">Our Tech Stack</small>
+                            <h2 class="my-4 text-4xl font-black text-gray-900 tracking-tight">Built with Industry-Leading Tech</h2>
+                            <p class="text-gray-500 text-lg leading-relaxed">
+                                InstaSenti mengintegrasikan berbagai teknologi mutakhir untuk memastikan kecepatan scraping, akurasi AI, dan visualisasi yang memukau.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-12 gap-8">
+                        <div v-for="tech in techItems" :key="tech.id" 
+                            class="lg:col-span-3 md:col-span-6 col-span-12 group">
+                            <div class="flex flex-col items-center md:items-start p-6 rounded-3xl border border-transparent hover:border-green-100 hover:bg-green-50/50 transition-all duration-300">
+                                <div class="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 border border-green-200 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" 
+                                    v-html="tech.logo">
+                                </div>
+
+                                <h4 class="text-xl font-bold mb-3 text-gray-800">{{ tech.name }}</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed md:text-left text-center">
+                                    {{ tech.desc }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="my-16" id="model">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-12 bg-linear-to-br from-green-900 via-green-800 to-green-950 rounded-2xl lg:p-14 p-8 shadow-2xl relative overflow-hidden">
+                        
+                        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+
+                        <div class="lg:col-span-10 lg:col-start-2 col-span-12 justify-center text-center relative z-10">
+                            <div class="mb-10 text-center">
+                                <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                                    Coba Demo Analisis AI
+                                </h3>
+                                <p class="text-green-100 text-lg max-w-2xl mx-auto">
+                                    Lengkapi detail di bawah ini untuk melihat bagaimana AI kami bekerja memetakan sentimen audiens Anda.
+                                </p>
+                            </div>
+
+                            <form class="grid grid-cols-12 gap-6 lg:mx-12 text-left" @submit.prevent="startAnalysis">
+                                <div class="md:col-span-6 col-span-12">
+                                    <label class="block text-sm font-semibold text-green-200 mb-2 ml-1">Username Target</label>
+                                    <div class="relative group">
+                                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-green-400 font-bold">@</span>
+                                        <input type="text" v-model="formData.username"
+                                            class="block w-full pl-10 pr-5 py-4 rounded-xl border-none bg-white/10 text-white placeholder-green-300/50 focus:ring-2 focus:ring-green-400 focus:bg-white/20 transition-all outline-none shadow-inner" 
+                                            placeholder="misal: kopikenangan.id" 
+                                            required />
+                                    </div>
+                                    <p class="text-[10px] text-green-200 italic mt-2 ml-1">* Pastikan akun bersifat publik</p>
+                                </div>
+
+                                <div class="md:col-span-6 col-span-12">
+                                    <label class="block text-sm font-semibold text-green-200 mb-2 ml-1">Jumlah Postingan</label>
+                                    <div class="relative">
+                                        <select v-model="formData.rangeMode"
+                                            class="block w-full px-5 py-4 rounded-xl border-none bg-white/10 text-white appearance-none focus:ring-2 focus:ring-green-400 focus:bg-white/20 transition-all outline-none shadow-inner cursor-pointer">
+                                            <option value="all" class="bg-green-900 text-white">Semua Postingan</option>
+                                            <option value="custom" class="bg-green-900 text-white">Postingan Spesifik (Custom)</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-green-400">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div v-if="formData.rangeMode === 'custom'" 
+                                    class="col-span-12 animate-in fade-in zoom-in-95 duration-300">
+                                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                                        <label class="block text-sm font-semibold text-green-200 mb-2 ml-1">Input Urutan Postingan</label>
+                                        <input type="text" v-model="formData.customRange"
+                                            class="block w-full px-5 py-4 rounded-xl border-none bg-white/10 text-white placeholder-green-300/50 focus:ring-2 focus:ring-green-400 focus:bg-white/20 transition-all outline-none shadow-inner" 
+                                            placeholder="Contoh: 1, 2, 5-8, 10" :required="formData.rangeMode === 'custom'" />
+                                        <p class="text-[11px] italic text-green-200 mt-3 flex items-center gap-2">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            Tips: Gunakan tanda hubung (-) untuk rentang postingan. Angka 1 menunjukan postingan pertama
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-span-12 mt-4">
+                                    <button class="w-full bg-white text-green-950 font-extrabold text-lg px-8 py-5 rounded-2xl hover:bg-green-50 hover:scale-[1.01] active:scale-95 transition-all cursor-pointer shadow-xl flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100" 
+                                        type="submit" :disabled="isLoading">
+                                        <template v-if="!isLoading">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                            </svg>
+                                            <span>Mulai Analisis Sekarang</span>
+                                        </template>
+
+                                        <template v-else>
+                                            <svg class="animate-spin h-6 w-6 text-green-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            <span>Sedang Menganalisis...</span>
+                                        </template>
+                                    </button>
+                                    <p class="text-center mt-6 text-xs text-green-200 italic font-light">
+                                        * Proses ini membutuhkan waktu tergantung jumlah komentar postingan.
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section v-if="analysisResult" id="result-section" class="py-12 animate-in fade-in slide-in-from-bottom-10 duration-700">
+                <div class="max-w-5xl mx-auto px-4">
+                    <div class="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+                            <span class="p-2 bg-green-100 rounded-lg text-green-600">📊</span>
+                            Hasil Analisis Sentimen
+                        </h2>
+                        <div class="grid grid-cols-2 gap-4 mb-10">
+                            <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl flex items-center gap-4 group transition-all hover:bg-slate-100/80">
+                                <div class="p-3 bg-white rounded-xl shadow-sm text-slate-500 group-hover:text-blue-600 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Postingan</p>
+                                    <p class="text-xl font-black text-slate-800">{{ analysisResult.total_post }}</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl flex items-center gap-4 group transition-all hover:bg-slate-100/80">
+                                <div class="p-3 bg-white rounded-xl shadow-sm text-slate-500 group-hover:text-amber-500 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Postingan Terpilih</p>
+                                    <p class="text-xl font-black text-slate-800">{{ analysisResult.selected_post }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                            <div class="lg:col-span-5 flex items-center justify-center">
+                                <div class="relative w-full max-w-[300px]">
+                                    <canvas id="sentimentChart" width="300" height="300"></canvas>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                        <span class="text-4xl font-black text-gray-800">{{ analysisResult.total_comments }}</span>
+                                        <span class="text-xs text-gray-400 uppercase tracking-widest">Total Komentar</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-7 space-y-4">
+                                <template v-for="(val, key) in parsedSummary" :key="key">
+                                    <div v-if="key !== 'total' && typeof val === 'object'" 
+                                        class="p-4 rounded-2xl border border-gray-50 flex items-center justify-between transition-all hover:shadow-md"
+                                        :class="getBgColor(key)">
+                                        
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-3 h-10 rounded-full" :class="getBarColor(key)"></div>
+                                            <div>
+                                                <p class="text-sm font-bold capitalize text-gray-600">{{ key }}</p>
+                                                <p class="text-2xl font-black text-gray-900">{{ val.count }} <span class="text-sm font-normal text-gray-500">Komentar</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-2xl font-bold text-gray-800">{{ val.percentage }}%</p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="mt-10 pt-6 border-t border-gray-50 flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p class="text-[11px] font-medium text-gray-600 italic tracking-wide">
+                                InstaSenti dapat membuat kesalahan. Pertimbangkan untuk memeriksa informasi penting secara manual.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
