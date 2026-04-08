@@ -1,5 +1,4 @@
 const { createApp } = Vue;
-
 createApp({
     data() {
         return {
@@ -138,6 +137,14 @@ createApp({
                 const response = await axios.post('http://127.0.0.1:8000/analyze/instagram', payload);
                 this.analysisResult = response.data;
 
+                Swal.fire({
+                    title : 'Success!',
+                    text  : `Successfully analyze ${response.data.total_comments} comments`,
+                    icon  : 'success',
+                    confirmButtonColor : '#16a34a',
+                    timer : 3000
+                });
+
                 this.$nextTick(() => {
                     setTimeout(() => { this.renderChart(); }, 200);
                     setTimeout(() => { 
@@ -158,28 +165,42 @@ createApp({
                 return;
             }
 
-            try {
-                const payload = {
-                    data: this.analysisResult.full_data
-                };
-
-                const response = await axios.post('http://127.0.0.1:8000/analyze/instagram/export', payload, 
-                    {responseType: 'blob', headers: { 'Content-Type': 'application/json' }
-                });
-
-                const url  = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href  = url 
-                link.setAttribute('download', 'instasent_results.xlsx');
-                document.body.appendChild(link);
-                link.click();
+            Swal.fire({
+                title: 'Export to Excel?',
+                text : 'Do you want to download the result?',
+                icon : 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#16e34a',
+                cancelButtonColor : '#64748b',
+                confirmButtonText : 'Yes, Download'
                 
-                link.remove();
-                window.URL.revokeObjectURL(url);
-            } catch(error) {
-                alert('Failed to download Excel File');
-                console.error(error);
-            }
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const payload = {
+                            data: this.analysisResult.full_data
+                        };
+
+                        const response = await axios.post('http://127.0.0.1:8000/analyze/instagram/export', payload, 
+                            {responseType: 'blob', headers: { 'Content-Type': 'application/json' }
+                        });
+
+                        const url  = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href  = url 
+                        link.setAttribute('download', 'instasent_results.xlsx');
+                        document.body.appendChild(link);
+                        link.click();
+                        
+                        link.remove();
+                        window.URL.revokeObjectURL(url);
+
+                        Swal.fire('Downloaded!', 'Your file has been saved', 'success')
+                    } catch(error) {
+                        Swal.fire('Error!', 'Failed to export data', 'error')
+                    }                    
+                }
+            })
         },
 
         renderChart() {
@@ -242,6 +263,22 @@ createApp({
             alert("Kendala: " + this.errorMessage);
         },
         
+        handleError(error) {
+            let msg = 'Something wrong on the server';
+            if (error.response) {
+                msg = error.response.data.detail || msg;
+            }
+            else { 
+                msg = 'Cant connect to the server. Make sure Backend (FastAPI) is active.'
+            }
+
+            Swal.fire({
+                title : 'Error!',
+                text  : msg,
+                icon  : 'error',
+                confirmButtonColor : '#d33'
+            });
+        },
         getLabelClass(label) {
             const l = String(label).toLowerCase();
             if (l === 'positive' || l === '1') return 'bg-green-100 text-green-700 border border-green-200';

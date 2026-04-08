@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="assets/js/main.js"></script>
 </head>
 
@@ -608,38 +609,47 @@
         </main>
     </div>
 </body> 
-<footer class="bg-gray-200 pt-2 pb-3">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-      <div class="grid grid-cols-12 items-center justify-center gap-6">
-         <div class="lg:col-span-3 col-span-12">
-            <a class="mb-4 mb-lg-0 block text-inverse" href="../index.html"><img class="h-10 w-auto" src="./assets/images/logo/instasenti.png" alt="" /></a>
-         </div>
-         <div class="lg:col-span-6 col-span-12 items-center justify-center">
-            <div class="text-sm mb-3 mb-lg-0 text-lg-center">
-               Copyright © 2026
-
-               <span><a href="#">InstaSent</a></span>
-               | Designed by
-               <span><a href="#home" target="_blank" class="text-green-600">Felix Mcgill</a> • Distributed by <a href="https://instagram.com/skrwydra_" target="_blank" class="text-green-600">Skrwydra</a></span></span>
-            </div>
-         </div>
-         <div class="lg:col-span-3">
-            <div class="lg:text-end flex items-center lg:justify-end">
-
-               <div class="flex gap-4">
-                  <a href="https://instagram.com/skrwydra_" class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M16.5 7.5v.01" /></svg>
-                  </a>
-                  <a href="#!" class="">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
-                 </a>
-                  <a href="#!" class="">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
-                  </a>
-               </div>
-            </div>
-         </div>
+<footer class="bg-zinc-900 py-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-center lg:text-left">
+        © 2026 
+        <a href="#" class="hover:text-green-500 transition">InstaSent</a>. 
+        All rights reserved.
       </div>
-   </div>
+
+      <div class="text-sm text-center">
+        Designed by 
+        <a href="#home" class="text-green-500 hover:underline">Felix Mcgill</a> 
+        • Distributed by 
+        <a href="https://instagram.com/skrwydra_" target="_blank" class="text-green-500 hover:underline">
+          Skrwydra
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://instagram.com/skrwydra_" class="hover:text-green-500 transition-colors text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </a>
+        <a href="#" class="hover:text-green-500 transition-colors text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </a>
+        <a href="#" class="hover:text-green-500 transition-colors text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4l11.7 16h4.3l-11.7 -16z"></path>
+            <path d="M4 20l6.7 -6.7m2.5 -2.5l6.8 -6.8"></path>
+            </svg>
+        </a>
+     </div>
+    </div>
+  </div>
 </footer>
 </html>
