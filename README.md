@@ -50,7 +50,7 @@ instasent/
 ## 💻 Installation and Usage
 **1. Clone the Repository:**
 ```bash
-git clone https://github.com/ardywrks10/bank-statement-extraction.git
+git clone https://github.com/ardywrks10/instasent-web-app.git
 ```
 **2. Navigate to the Project Directory:**
 ```bash
