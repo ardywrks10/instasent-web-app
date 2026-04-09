@@ -46,3 +46,34 @@ instasent/
 ├── README.md                          # Dokumentasi utama proyek
 └── requirements.txt                   # Daftar dependensi Python yang diperlukan
 ```
+
+## 💻 Installation and Usage
+**1. Clone the Repository:**
+```bash
+git clone https://github.com/ardywrks10/bank-statement-extraction.git
+```
+**2. Navigate to the Project Directory:**
+```bash
+cd bank-statement-extraction
+```
+**3. Install Depedencies:**
+```bash
+pip install -r requirements.pip.txt
+```
+**4. Make .env to connect to database client**
+```bash
+cp .env.example .env
+```
+**5. Fill .env value**
+```bash
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+DB_URL=
+```
+**6. Run the Uvicorn Server**
+```bash
+uvicorn app.main:app --reload
+```
