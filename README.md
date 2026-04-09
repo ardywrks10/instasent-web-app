@@ -10,9 +10,9 @@ This project is built with a modern full-stack architecture that decouples the f
 * **Framework:** Vue.js 3 (Options API)
 * **Language:** JavaScript
 * **Styling:** Tailwind CSS
-* **Data Visualization:** Chart.js (for sentiment distribution charts)
-* **Data Fetching:** Axios (for Backend REST API communication)
-* **Notifications:** SweetAlert2 (for interactive UI alerts and loading states)
+* **Data Visualization:** Chart.js (Sentiment distribution charts)
+* **Data Fetching:** Axios (Backend REST API communication)
+* **Notifications:** SweetAlert2 (Interactive UI alerts and loading states)
 
 ---
 
@@ -20,10 +20,10 @@ This project is built with a modern full-stack architecture that decouples the f
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) ![Python](https://img.shields.io/badge/Python_3-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white) ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
 
 * **Framework:** FastAPI (Python)
-* **Language:** Python 3.10+
-* **Machine Learning:** Scikit-Learn (Support Vector Machine / Naive Bayes algorithms)
+* **Language:** Python 3.12+
+* **Machine Learning:** Scikit-Learn (Support Vector Machine algorithms)
 * **Data Scraping:** Selenium (Instagram comment extraction automation)
-* **Data Processing:** Pandas & Openpyxl (for DataFrame manipulation and Excel exporting)
+* **Data Processing:** Pandas & Openpyxl (DataFrame manipulation and Excel exporting)
 
 ## 📂 Directory Structure
 ```bash
